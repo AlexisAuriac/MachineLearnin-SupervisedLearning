@@ -25,3 +25,13 @@ Install requirements:
 ```bash
 pip3 install -r requirements.txt
 ```
+
+## Todo
+
+Exercise 1:
+- clean up code (see subject part 6 "code style")
+- redact explaination
+
+Exercise 2, 3, 4, and 5
+
+Write report
