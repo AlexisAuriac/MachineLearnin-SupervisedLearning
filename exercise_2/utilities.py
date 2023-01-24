@@ -1,10 +1,15 @@
-def mapArrayToMatrix(l, f):
-	res = []
+from typing import List, Callable, TypeVar
 
-	for x in l:
-		line = []
-		for y in l:
-			line.append(f(x, y))
-		res.append(line)
+import numpy as np
 
-	return res
+A = TypeVar('A')
+B = TypeVar('B')
+def mapArrayToMatrix(l: List[A], f: Callable[[A, A], B]) -> np.ndarray:
+	size = len(l)
+	m = np.zeros((size, size))
+
+	for i in range(size):
+		for j in range(size):
+			m[i, j] = f(l[i], l[j])
+
+	return m

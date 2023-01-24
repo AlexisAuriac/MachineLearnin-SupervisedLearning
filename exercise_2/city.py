@@ -27,8 +27,7 @@ cities_char = [
 
 city_char_df = pd.DataFrame(cities_char, cities, cities_metrics)
 
-def computeDissimilarityCity(city1, city2):
-	global i
+def computeDissimilarityCity(city1: tuple[float, float], city2: tuple[float, float]) -> float:
 	city1_coords = city1[0]
 	city2_coords = city2[0]
 
