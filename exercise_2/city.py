@@ -44,14 +44,14 @@ def computeDissimilarityCity(city1, city2):
 	# https://stackoverflow.com/a/43211266/12864941232,741
 	distance = geopy.distance.geodesic(city1_coords, city2_coords).km
 
-	dissimilarity_capital = 0 if city1_capital == city2_capital else 5
 	dissimilarity_country = 0 if city1_country == city2_country else 10
+	dissimilarity_capital = 0 if city1_capital == city2_capital else 5
 
 	pop_diff = abs(city1_population - city2_population)
 
 	return math.sqrt(
-		0 if distance == 0 else math.log(distance) ** 2
-		+ 0 if pop_diff == 0 else math.log(pop_diff) ** 2
+		0 if distance == 0 else math.log10(distance) ** 2
+		+ 0 if pop_diff == 0 else math.log10(pop_diff) ** 2
 		+ dissimilarity_country ** 2
 		+ dissimilarity_capital ** 2
 	)
