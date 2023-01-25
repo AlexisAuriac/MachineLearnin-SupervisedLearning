@@ -114,7 +114,7 @@ diss_matrix = np.sqrt(
 	+ (diss_music * MUSIC_IMP_FACTOR) ** 2
 )
 
-np.save('data.npy', diss_matrix)
+np.save('dissimilarity_matrix.npy', diss_matrix)
 
 print('====== total ======')
 print(f'mean: {diss_matrix.mean()}')
