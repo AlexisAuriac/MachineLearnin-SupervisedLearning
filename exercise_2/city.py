@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import geopy.distance
 
-from utilities import mapArrayToMatrix
+from utilities import mapArrayToMatrix, matrixToDict
 
 cities = [
 	'paris',
@@ -59,3 +59,5 @@ dissimilarity_cities = mapArrayToMatrix(cities_char, computeDissimilarityCity)
 
 # https://stackoverflow.com/a/29482058/12864941
 city_diss_df = pd.DataFrame(dissimilarity_cities, cities, cities)
+
+city_diss_dict = matrixToDict(dissimilarity_cities, cities, cities)

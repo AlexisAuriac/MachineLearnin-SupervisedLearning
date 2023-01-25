@@ -1,9 +1,9 @@
 import numpy as np
 import pandas as pd
 
-from utilities import mapArrayToMatrix
+from utilities import mapArrayToMatrix, matrixToDict
 
-jobs_titles = [
+jobs = [
 	'designer',
 	'fireman',
 	'teacher',
@@ -26,10 +26,12 @@ jobs_char = np.array([
 ])
 
 # https://stackoverflow.com/a/29482058/12864941
-job_char_df = pd.DataFrame(jobs_char, jobs_titles, job_metrics)
+job_char_df = pd.DataFrame(jobs_char, jobs, job_metrics)
 
 # A function that does this probably already exists
 # https://stackoverflow.com/a/1401828/12864941
 dissimilarity_jobs = mapArrayToMatrix(jobs_char, lambda x, y: np.linalg.norm(y - x))
 
-job_diss_df = pd.DataFrame(dissimilarity_jobs, jobs_titles, jobs_titles)
+job_diss_df = pd.DataFrame(dissimilarity_jobs, jobs, jobs)
+
+job_diss_dict = matrixToDict(dissimilarity_jobs, jobs, jobs)

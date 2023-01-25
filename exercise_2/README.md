@@ -13,13 +13,21 @@ Some features are numerical and others are categorical, hence you can not use a 
 Importantly, you must define and explain which features are more important with this metric, since you have to balance the contribution of all the features. Your metric should be meaningful in the sense that not all feature values should induce the same contribution to the dissimilarity : the music style "technical death metal" is closer to "metal" than it is to "classical".
 ```
 
-## Sources
+## Main sources
 
-Simple explaination of similarity/dissimilarity/distance in datascience (with examples): https://towardsdatascience.com/17-types-of-similarity-and-dissimilarity-measures-used-in-data-science-3eb914d2681
+Simple explanation of similarity/dissimilarity/distance in datascience (with great examples): https://towardsdatascience.com/17-types-of-similarity-and-dissimilarity-measures-used-in-data-science-3eb914d2681
 
-## Dataset
+## Dissimilarity by individual feature
 
 columns: age,height,job,city,favorite music style
+
+### age
+
+euclidean distance
+
+### height
+
+euclidean distance
 
 ### Job
 
@@ -28,8 +36,6 @@ columns: age,height,job,city,favorite music style
 Non numerical data.
 
 Jobs in the dataset: designer, fireman, teacher, doctor, painter, developper, engineer
-
-The metrics and values chosen are subjective and will not be justified.
 
 Evaluating jobs using 3 metrics: art, science, and altruism
 
@@ -45,7 +51,7 @@ developper    3        6         1
 engineer      4        8         2
 ```
 
-Using the euclidian distance we get this dissimilarity matrix:
+Using the euclidean distance we get this dissimilarity matrix:
 ```
              designer    fireman   teacher     doctor    painter  developper  engineer
 designer     0.000000  10.770330  4.898979   9.380832   2.449490    6.557439  6.708204
@@ -65,8 +71,6 @@ Non numerical data.
 
 Cities in the dataset: paris, marseille, toulouse, madrid, lille
 
-The metrics and values chosen are subjective and will not be justified.
-
 Evaluating cities using 4 metrics: coordinates, population, country, and if it is a capital.
 
 Values:
@@ -79,9 +83,9 @@ madrid     (40.4168, 3.7038)  3223000.000   Spain     True
 lille      (50.6292, 3.0573)      232.741  France    False
 ```
 
-To measure distance we use the library ```geopy``` (Euclidian won't work since the earth isn't flat). We then use log10 so that it doesn't impact the dissimilarity too much.
+To measure distance we use the library ```geopy``` (Euclidean won't work since the earth isn't flat). We then use log10 so that it doesn't impact the dissimilarity too much.
 
-We compare the population using euclidian distance. We then use log10 so that it doesn't impact the dissimilarity too much.
+We compare the population using euclidean distance. We then use log10 so that it doesn't impact the dissimilarity too much.
 
 Not being from the same country adds a dissimilarity of ```10```.
 
@@ -107,7 +111,7 @@ Non numerical data.
 
 Music styles in the dataset: trap, hiphop, metal, rock, rap, classical, other, jazz, technical death metal
 
-Hard to find metrics, there aren't clear delimitations between music styles.
+Hard to find metrics, there aren't clear delimitation between music styles.
 
 Could maybe use Google trends to measure popularity.
 
@@ -130,4 +134,75 @@ classical                20      15     14    12   15          0     10     8   
 other                    10      10     10    10   10         10      0    10                     10
 jazz                     15      12     20    17   15          8     10     0                     20
 technical death metal    20      20      5    13   20         20     10    20                      0
+```
+
+## Overall dissimilarity
+
+(see exercise_2.py)
+
+### Adjusting means
+
+If we look at the mean and standard deviation for each column we get:
+```
+                            mean       std
+age                     6.456159  4.892174
+height                  6.000623  4.679549
+job                     6.259779  3.747122
+city                    6.950629  5.205568
+favorite music style   11.796500  6.390359
+```
+
+The mean isn't the same, which means that because of the way we compute dissimilarity some columns have inherently more value, that's bad ! It also makes standard deviations impossible to compare.
+
+We will try to have all means equal 10 (10 is arbitrary, it makes things relatively readable).
+
+After adjustment we get this:
+```
+                            mean       std  adjusted std
+age                     6.456159  4.892174      7.577531
+height                  6.000623  4.679549      7.798439
+job                     6.259779  3.747122      5.986029
+city                    6.950629  5.205568      7.489348
+favorite music style   11.796500  6.390359      5.417165
+```
+
+### Deciding feature importance
+
+Age: The age of a person changes a lot of a person, beliefs, physical ability, experience, etc...
+-> **3**
+
+Height: Beside appearance and physical ability (in some contexts) this doesn't change much
+-> **1**
+
+Job: job is closely related to knowledge, ability, wealth, status, and more
+-> **3**
+
+City: Geographical location is related to culture, opportunities, language, and more
+-> **2.5**
+
+Favorite music style: As explained before, this dissimilarity is very hard to measure and music styles have a lot of intersections
+-> **0.5**
+
+### Result matrix
+
+See ```data.npy``` for the final dissimilarity matrix.
+
+mean: ```58.386196906332174```
+
+standard deviation: ```19.975793552979223```
+
+### Side note: most (dis)similar items
+
+Most similar items:
+```
+           age      height      job    city favorite music style
+102  27.086348  180.242244  teacher  madrid                 jazz
+163  26.968458  179.665081  teacher  madrid                 jazz
+```
+
+Most dissimilar items:
+```
+          age      height      job      city favorite music style
+40  10.851506  169.432515  fireman     lille                 jazz
+85  46.610179  181.358551  fireman  toulouse                 trap
 ```

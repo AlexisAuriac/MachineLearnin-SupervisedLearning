@@ -1,6 +1,8 @@
 import numpy as np
 import pandas as pd
 
+from utilities import matrixToDict
+
 music_styles = [
 	'trap',
 	'hiphop',
@@ -29,3 +31,5 @@ dissimilarity_music = np.array([
 assert (dissimilarity_music == dissimilarity_music.T).all()
 
 music_diss_df = pd.DataFrame(dissimilarity_music, music_styles, music_styles)
+
+music_diss_dict = matrixToDict(dissimilarity_music, music_styles, music_styles)
