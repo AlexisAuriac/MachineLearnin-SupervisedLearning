@@ -30,6 +30,9 @@ pip3 install -r requirements.txt
 
 Exercise 1, 2: done
 
-Exercise 3, 4, and 5
+Exercise 3:
+- got some results but it seems too easy, didn't need to do most of what was asked in the subject, probably misunderstood what was asked
+
+Exercise 4, and 5
 
 Write report
