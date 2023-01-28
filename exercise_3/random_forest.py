@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+"""
+RandomForest model with hyperparameter tuning
+"""
+
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import RandomizedSearchCV

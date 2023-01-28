@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+"""
+KNeigbors model with hyperparameter tuning
+"""
+
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import GridSearchCV

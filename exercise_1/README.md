@@ -24,6 +24,7 @@ The columns must satisfy the following requirements :
 ## Sources
 
 generate data from different distributions: https://stackabuse.com/generating-synthetic-data-with-numpy-and-scikit-learn/
+
 generate correlated data: https://stackoverflow.com/a/16026231/12864941
 
 ## Todo

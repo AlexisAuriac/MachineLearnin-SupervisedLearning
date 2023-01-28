@@ -1,3 +1,7 @@
+"""
+Dissimilarity data and functions for the city feature of the dataset
+"""
+
 import math
 
 import numpy as np
@@ -28,6 +32,9 @@ cities_char = [
 city_char_df = pd.DataFrame(cities_char, cities, cities_metrics)
 
 def computeDissimilarityCity(city1: tuple[float, float], city2: tuple[float, float]) -> float:
+	"""
+	Computes the dissimilarity of 2 cities
+	"""
 	city1_coords = city1[0]
 	city2_coords = city2[0]
 

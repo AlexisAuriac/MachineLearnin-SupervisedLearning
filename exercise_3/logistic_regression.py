@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+"""
+Logistic Regression model with hyperparameter tuning
+"""
+
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import GridSearchCV

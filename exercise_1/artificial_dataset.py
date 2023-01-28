@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+"""
+Generates dataset.
+"""
+
 import numpy as np
 
 # generate data from different distributions: https://stackabuse.com/generating-synthetic-data-with-numpy-and-scikit-learn/

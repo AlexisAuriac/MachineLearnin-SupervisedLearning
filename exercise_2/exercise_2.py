@@ -1,5 +1,18 @@
 #!/bin/env python3
 
+"""
+Main file of the exercise
+Display information about the dataset and its features:
+- the chosen characterstics of non-numerical features
+- the dissimilarity between the classes of the features
+- the dissimilarity between the features in the dataset
+- the mean and standard deviations of all features indivually
+- the mean and standard deviations of the items in the dataset
+- the 2 most similar items
+- the 2 most dissimilar items
+It also saves the dissimilarity matrix to a .npy file
+"""
+
 import math
 from typing import Tuple
 
@@ -28,6 +41,9 @@ data_df = pd.read_csv('dataset.csv', index_col=0)
 
 # Unused
 def dissimilarity_person(person1: Tuple[float, float, str, str, str], person2: Tuple[float, float, str, str, str]) -> float:
+	"""
+	Computes the dissimilarity of 2 people
+	"""
 	age1 = person1[0]
 	age2 = person2[0]
 
@@ -55,51 +71,29 @@ data = np.array(data_df.values)
 
 print('==== Dissimilarity of columns within the dataset ====')
 
-diss_col_df = {
-	'mean': [],
-	'std': [],
-	'adjusted std': [],
-}
-
 diss_age = mapArrayToMatrix(data[:, 0], lambda x, y: abs(x-y))
-
-diss_col_df['mean'].append(diss_age.mean())
-diss_col_df['std'].append(diss_age.std())
-diss_age *= 10 / diss_age.mean()
-diss_col_df['adjusted std'].append(diss_age.std())
-
 diss_height = mapArrayToMatrix(data[:, 1], lambda x, y: abs(x-y))
-
-diss_col_df['mean'].append(diss_height.mean())
-diss_col_df['std'].append(diss_height.std())
-diss_height *= 10 / diss_height.mean()
-diss_col_df['adjusted std'].append(diss_height.std())
-
 diss_job = mapArrayToMatrix(data[:, 2], lambda x, y: job_diss_dict[x][y])
-
-diss_col_df['mean'].append(diss_job.mean())
-diss_col_df['std'].append(diss_job.std())
-diss_job *= 10 / diss_job.mean()
-diss_col_df['adjusted std'].append(diss_job.std())
-
 diss_city = mapArrayToMatrix(data[:, 3], lambda x, y: city_diss_dict[x][y])
-
-diss_col_df['mean'].append(diss_city.mean())
-diss_col_df['std'].append(diss_city.std())
-diss_city *= 10 / diss_city.mean()
-diss_col_df['adjusted std'].append(diss_city.std())
-
 diss_music = mapArrayToMatrix(data[:, 4], lambda x, y: music_diss_dict[x][y])
 
-diss_col_df['mean'].append(diss_music.mean())
-diss_col_df['std'].append(diss_music.std())
+diss_col_df = {
+	'mean': [diss_age.mean(), diss_height.mean(), diss_job.mean(), diss_city.mean(), diss_music.mean()],
+	'std': [diss_age.std(), diss_height.std(), diss_job.std(), diss_city.std(), diss_music.std()],
+}
+
+diss_age *= 10 / diss_age.mean()
+diss_height *= 10 / diss_height.mean()
+diss_job *= 10 / diss_job.mean()
+diss_city *= 10 / diss_city.mean()
 diss_music *= 10 / diss_music.mean()
-diss_col_df['adjusted std'].append(diss_music.std())
+
+diss_col_df['adjusted std'] = [diss_age.std(), diss_height.std(), diss_job.std(), diss_city.std(), diss_music.std()]
+
 diss_col_df = pd.DataFrame(diss_col_df, ['age', 'height', 'job', 'city', 'favorite music style'])
 print(diss_col_df)
 
-
-# See README for justifications
+# See README.md for justifications
 AGE_IMP_FACTOR = 3
 HEIGHT_IMP_FACTOR = 1
 JOB_IMP_FACTOR = 3
@@ -117,8 +111,8 @@ diss_matrix = np.sqrt(
 np.save('dissimilarity_matrix.npy', diss_matrix)
 
 print('====== total ======')
-print(f'mean: {diss_matrix.mean()}')
-print(f'standard deviation: {diss_matrix.std()}')
+print(f'mean: {diss_matrix.mean():.3f}')
+print(f'standard deviation: {diss_matrix.std():.3f}')
 
 
 # from examples: https://numpy.org/doc/stable/reference/generated/numpy.argmin.html

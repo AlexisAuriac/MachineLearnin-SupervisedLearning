@@ -28,7 +28,7 @@ pip3 install -r requirements.txt
 
 ## Todo
 
-Exercise 1, 2, 3: write docstrings
+Exercise 1, 2, 3: done
 
 Exercise 4, 5: everything
 
