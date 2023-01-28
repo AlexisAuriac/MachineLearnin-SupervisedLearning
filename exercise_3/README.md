@@ -31,16 +31,93 @@ overview of classification and how to do it with sklearn: https://stackabuse.com
 
 ## Solution
 
-Managed to get a precision of ```0.904``` basically copying code from a tutorial (see main sources).
+I tried 3 models for this exercise: KNeighbors, RandomForest and Logistic Regression.
 
-This seems waaaay too easy.
+For each model I chose some hyperparameters to tune and then used ```GridSearchCV``` or ```RandomizedSearchCV``` to tune them and measure the mean accuracy of the model.
 
-This method uses logistic regression, but the exercise 4 is supposed to be about regression
+```GridSearchCV``` and ```RandomizedSearchCV``` both use cross validation.
 
-The subject also requires explaining the choice of hyperparameters and the optimization procedure, which I did not do.
+### KNeighbors Classifier
 
-Clearly I missed something.
+(see kneighbors.py)
 
-- did I solve it in the wrong way ?
-- used tools I wasn't allowed to use ?
-- misunderstand the objective ?
+sources:
+- [official doc](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsClassifier.html)
+- [hyperparameter tuning](https://medium.datadriveninvestor.com/k-nearest-neighbors-in-python-hyperparameters-tuning-716734bc557f)
+- [issues with ```leaf_size``` tuning](https://stackoverflow.com/a/49969671/12864941)
+
+hyperparameters:
+- ```n_neighbors```: can cause overfitting or underfitting if it is too small or too big respectively
+- ```weights```: give all points the same or a different importance
+- ```p```: distance measure, 1 -> manhattan / 2 -> euclidean
+
+The best parameters found using ```GridSearchCV``` were:
+```
+{
+	'n_neighbors': 11,
+	'p': 2,
+	'weights': 'uniform'
+}
+```
+
+They give a mean score of ```0.804```.
+
+### RandomForest Classifier
+
+(see random_forest.py)
+
+sources:
+- [official doc](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestClassifier.html)
+- [hyperparameter tuning](https://towardsdatascience.com/hyperparameter-tuning-the-random-forest-in-python-using-scikit-learn-28d2aa77dd74)
+
+hyperparameters:
+- ```n_estimators```: number of trees
+- ```max_features```: number of features to consider at every split
+- ```max_depth```: maximum number of levels in tree
+- ```min_samples_split```: minimum number of samples required to split a node
+- ```min_samples_leaf```: minimum number of samples required at each leaf node
+- ```bootstrap```: method of selecting samples for training each tree
+
+```GridSearchCV``` took too long so I decided to use ```RandomizedSearchCV``` for this model.
+
+The best parameters found using ```RandomizedSearchCV``` were:
+```
+{
+	'n_estimators': 400,
+	'min_samples_split': 10,
+	'min_samples_leaf': 4,
+	'max_features': 'sqrt',
+	'max_depth': None,
+	'bootstrap': False
+}
+```
+
+They give a mean score of ```0.816```.
+
+### LogisticRegression
+
+(see logistic_regression.py)
+
+sources:
+- [official doc](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html)
+- [fix warning about failed covergence](https://stats.stackexchange.com/a/184026/378578)
+
+hyperparameters:
+- ```C```: controls regularization strength (prevents overfitting)
+- ```solver```: some solvers are better depending on: number of features, size of dataset, number of classes, etc...
+- ```max_iter```: maximum number of iterations taken for the solvers to converge
+
+I am confused about the ```penalty``` hyperparameter, it seems to be deprecated in favor of solver but I am not sure. Furthermore only some values of ```solver``` are compatible with some values of ```penalty```, I am not sure how to take that into account when using ```GridSearchCV```/```RandomizedSearchCV```. I eventually decided to exclude it from the tuning.
+
+The best parameters found using ```GridSearchCV``` were:
+```
+{
+	'C': 0.01,
+	'solver': 'newton-cg',
+	'max_iter': 1000
+}
+```
+
+They give a mean score of ```0.904```.
+
+This classification method achieves a mean score superior to ```0.85```.

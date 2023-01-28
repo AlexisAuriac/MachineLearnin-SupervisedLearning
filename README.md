@@ -28,11 +28,8 @@ pip3 install -r requirements.txt
 
 ## Todo
 
-Exercise 1, 2: done
+Exercise 1, 2, 3: write docstrings
 
-Exercise 3:
-- got some results but it seems too easy, didn't need to do most of what was asked in the subject, probably misunderstood what was asked
-
-Exercise 4, and 5
+Exercise 4, 5: everything
 
 Write report
