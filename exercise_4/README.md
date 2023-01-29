@@ -16,7 +16,7 @@ https://fr.wikipedia.org/wiki/Coefficient_de_d%C3%A9termination
 
 https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html
 
-Several methods might work, including some methods that we have not explicitely studied in the class. Do not hesitate to try such methods.
+Several methods might work, including some methods that we have not explicitly studied in the class. Do not hesitate to try such methods.
 
 ## Main sources
 
@@ -24,13 +24,17 @@ simple explanation of regression and regression techniques: https://www.analytic
 
 great tutorial for polynomial regression: https://data36.com/polynomial-regression-python-scikit-learn/
 
+how to compute and interpret VIF: https://www.displayr.com/variance-inflation-factors-vifs/
+
+code example for computing VIF: https://www.geeksforgeeks.org/detecting-multicollinearity-with-vif-python/
+
 ## Linear regression
 
 (see linear_regression.py)
 
-"Vanilla linear regression doesn't have any hyperparameters. But variants of linear regression do." - https://www.oreilly.com/library/view/evaluating-machine-learning/9781492048756/ch04.html
-
 Mean R2: ```0.688```
+
+This accuracy is too low.
 
 ## Logistic regression
 
@@ -41,22 +45,37 @@ Can't use it because dependent variable is not binary.
 (see polynomial_regression.py)
 
 Mean R2 (degree=2): ```0.750```
+
 Mean R2 (degree=3): ```0.722```
 
-Better than linear regression but still not enough.
+The reduced accuracy with degree=3 can be explained by overfitting.
+
+degree=4 is too complex to be tested (I don't have enough RAM test it anyways).
+
+This method yields better results than linear regression but is still not enough.
 
 ## VIF / multicollinearity
 
-how to compute and interpret VIF: https://www.displayr.com/variance-inflation-factors-vifs/
+(see data_vif.py)
 
-code example: https://www.geeksforgeeks.org/detecting-multicollinearity-with-vif-python/
+mean VIF: ```7.826```
 
-The VIF of the data is moderately high.
+Standard deviation of VIF: ```0.846```
+
+The VIF of the data is moderately high, which is a sign of multicollinearity.
+
+Ridge and Lasso regression are better for dataset who suffer from multicollinearity.
 
 ## Ridge regression
+
+(see ridge.py)
 
 Mean R2: ```0.765```
 
 ## Lasso regression
 
+(see lasso.py)
+
 Mean R2: ```0.887```
+
+Satisfactory solution.

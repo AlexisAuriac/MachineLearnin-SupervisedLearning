@@ -30,8 +30,8 @@ pip3 install -r requirements.txt
 
 ## Todo
 
-Exercise 1, 2, 3: done
+Exercise 1, 2, 3, 4: done
 
-Exercise 4, 5: everything
+Exercise 5: everything
 
 Write report

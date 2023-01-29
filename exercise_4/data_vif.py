@@ -11,5 +11,7 @@ df["feature"] = list(range(X.shape[1]))
 
 df["VIF"] = [variance_inflation_factor(X, i) for i in range(X.shape[1])]
 
-print(df['VIF'].mean())
-print(df['VIF'].std())
+print(f"Mean VIF: {df['VIF'].mean():.3f}")
+# 7.826
+print(f"Standard deviation of VIF: {df['VIF'].std():.3f}")
+# 0.846
