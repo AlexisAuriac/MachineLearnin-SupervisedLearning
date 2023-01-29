@@ -15,6 +15,8 @@ See ```MLI_supervised_learning_project.pdf```.
 
 ## Installation
 
+This process has been tested with python3.10, using other versions may cause issues.
+
 Create a virtual env:
 ```bash
 python3 -m venv venv
