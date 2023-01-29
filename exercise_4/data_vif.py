@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+"""
+Computes the mean and standard deviation of the VIF of the dataset
+"""
+
 import numpy as np
 import pandas as pd
 from statsmodels.stats.outliers_influence import variance_inflation_factor

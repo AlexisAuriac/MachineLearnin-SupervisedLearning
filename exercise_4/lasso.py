@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+"""
+Lasso regression model with hyperparameter tuning
+"""
+
 import numpy as np
 from sklearn.linear_model import Lasso
 from sklearn.model_selection import GridSearchCV

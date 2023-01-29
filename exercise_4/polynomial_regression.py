@@ -1,5 +1,10 @@
 #!/bin/env python3
 
+"""
+Polynomial regression model with cross validation
+The model is tested with degree 2 and 3
+"""
+
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import cross_val_score
