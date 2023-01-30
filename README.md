@@ -30,7 +30,11 @@ pip3 install -r requirements.txt
 
 ## Report
 
+The report files can be found in ```report/```.
 
+The report is a pdf file written in latex and generated using pdflatex.
+
+The process of installing latex tools is complicated and platform dependent (and annoying), so it won't be explained here.
 
 ## Todo
 
