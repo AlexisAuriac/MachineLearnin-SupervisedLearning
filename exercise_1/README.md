@@ -3,12 +3,9 @@
 ## Subject
 
 ```
-The goal of this exercise is to work with statistical notions such as mean, standard
-deviation, and correlation.
+The goal of this exercise is to work with statistical notions such as mean, standard deviation, and correlation.
 
-Write a file named artificial_dataset.py that generates a numerical dataset with
-300 datapoints (i.e. lines) and at least 6 columns and saves it to a csv file or to a
-numpy array in a binary python file.
+Write a file named artificial_dataset.py that generates a numerical dataset with 300 datapoints (i.e. lines) and at least 6 columns and saves it to a csv file or to a numpy array in a binary python file.
 
 The columns must satisfy the following requirements :
 - they must all have a different mean
@@ -26,13 +23,6 @@ The columns must satisfy the following requirements :
 generate data from different distributions: https://stackabuse.com/generating-synthetic-data-with-numpy-and-scikit-learn/
 
 generate correlated data: https://stackoverflow.com/a/16026231/12864941
-
-## Todo
-
-- add documentation
-- improve code
-- redact correctly for report
-- ask teacher if results/methods are good ? (not sure that's allowed)
 
 ## Usage
 

@@ -1,0 +1,10 @@
+# Latex files
+*.aux
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+
+# PDF report should be at the root of the project
+report.pdf

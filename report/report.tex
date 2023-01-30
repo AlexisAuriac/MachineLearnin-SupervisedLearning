@@ -1,0 +1,305 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% template: https://www.overleaf.com/latex/templates/imperial-assignment-template/pbnrncvckyjv
+
+%Packages
+\documentclass[10pt, a4paper]{article}
+\usepackage[top=3cm, bottom=4cm, left=3.5cm, right=3.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd, fancyhdr, color, comment, graphicx, environ}
+\usepackage{float}
+\usepackage{mathrsfs}
+\usepackage{unicode-math}
+% \setmathfont{TeX Gyre Termes Math}
+\usepackage{lastpage}
+\usepackage[dvipsnames]{xcolor}
+\usepackage[framemethod=TikZ]{mdframed}
+\usepackage{enumerate}
+\usepackage[shortlabels]{enumitem}
+\usepackage{fancyhdr}
+\usepackage{indentfirst}
+\usepackage{listings}
+\usepackage{sectsty}
+\usepackage{thmtools}
+\usepackage{shadethm}
+\usepackage{hyperref}
+\usepackage{setspace}
+\usepackage[linguistics]{forest}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Environment setup
+\mdfsetup{skipabove=\topskip,skipbelow=\topskip}
+\newrobustcmd\ExampleText{%
+An \textit{inhomogeneous linear} differential equation has the form
+\begin{align}
+L[v ] = f,
+\end{align}
+where $L$ is a linear differential operator, $v$ is the dependent
+variable, and $f$ is a given non−zero function of the independent
+variables alone.
+}
+\mdfdefinestyle{theoremstyle}{%
+linecolor=black,linewidth=1pt,%
+frametitlerule=true,%
+frametitlebackgroundcolor=gray!20,
+innertopmargin=\topskip,
+}
+\mdtheorem[style=theoremstyle]{Problem}{Problem}
+\newenvironment{Solution}{\textbf{Solution.}}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fill in the appropriate information below
+\newcommand{\norm}[1]{\left\lVert#1\right\rVert}
+\newcommand\course{Machine Learning - Supervised Learning}
+\newcommand\hwnumber{M-MLR-900}
+\newcommand\Information{(Alexandre Guichet, Alexis Auriac, Benjamin Feller)}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Page setup
+\pagestyle{fancy}
+\headheight 35pt
+\lhead{\today}
+\rhead{\includegraphics[width=2.5cm]{epitech_logo.png}}
+\lfoot{}
+\pagenumbering{arabic}
+\cfoot{\small\thepage}
+\rfoot{}
+\headsep 1.2em
+\renewcommand{\baselinestretch}{1.25}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Add new commands here
+\renewcommand{\labelenumi}{\alph{enumi})}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\PP}{\mathbb P}
+\DeclareMathOperator{\Mod}{Mod} 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+\newtheorem*{theorem}{Theorem}
+\newtheorem*{lemma}{Lemma}
+\newtheorem{case}{Case}
+\newcommand{\assign}{:=}
+\newcommand{\infixiff}{\text{ iff }}
+\newcommand{\nobracket}{}
+\newcommand{\backassign}{=:}
+\newcommand{\tmmathbf}[1]{\ensuremath{\boldsymbol{#1}}}
+\newcommand{\tmop}[1]{\ensuremath{\operatorname{#1}}}
+\newcommand{\tmtextbf}[1]{\text{{\bfseries{#1}}}}
+\newcommand{\tmtextit}[1]{\text{{\itshape{#1}}}}
+
+\newenvironment{itemizedot}{\begin{itemize} \renewcommand{\labelitemi}{$\bullet$}\renewcommand{\labelitemii}{$\bullet$}\renewcommand{\labelitemiii}{$\bullet$}\renewcommand{\labelitemiv}{$\bullet$}}{\end{itemize}}
+\catcode`\<=\active \def<{
+\fontencoding{T1}\selectfont\symbol{60}\fontencoding{\encodingdefault}}
+\catcode`\>=\active \def>{
+\fontencoding{T1}\selectfont\symbol{62}\fontencoding{\encodingdefault}}
+\catcode`\<=\active \def<{
+\fontencoding{T1}\selectfont\symbol{60}\fontencoding{\encodingdefault}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Begin now!
+
+
+
+\begin{document}
+
+\begin{titlepage}
+    \begin{center}
+        \vspace*{3cm}
+            
+        \Huge
+        \textbf{Report}
+            
+        \vspace{1cm}
+        \huge
+        \hwnumber
+            
+        \vspace{1.5cm}
+        \Large
+            
+        \textbf{\Information}                      % <-- author
+        
+            
+        \vfill
+        
+        \course
+            
+        \vspace{1cm}
+            
+        \includegraphics[width=0.4\textwidth]{epitech_logo.png}
+
+        \Large
+        
+        \today
+            
+    \end{center}
+\end{titlepage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Start the assignment now
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\subsubsection*{Introduction}
+
+We did part 1, 2, 3, and 4 but did not have time to do part 5.
+
+Division of labor:
+\begin{itemize}
+    \item Alexandre: part 1
+    \item Benjamin: part 2
+    \item Alexis: part 3 and 4, writing report
+\end{itemize}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part 1
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Part 1}
+
+\begin{Problem}
+    The goal of this exercise is to work with statistical notions such as mean, standard deviation, and correlation.
+    
+    Write a file named artificial\_dataset.py that generates a numerical dataset with 300 datapoints (i.e. lines) and at least 6 columns and saves it to a csv file or to a numpy array in a binary python file.
+
+    The columns must satisfy the following requirements:
+    \begin{itemize}
+        \item they must all have a different mean
+        \item they must all have a different standard deviation (English for "écart type")
+        \item at least one column should contain integers.
+        \item at least one column should contain floats.
+        \item one column must have a mean close to 2.5.
+        \item some columns must be positively correlated.
+        \item some columns must be negatively correlated.
+        \item some columns must have a correlation close to 0.
+    \end{itemize}
+\end{Problem}
+
+\begin{Solution}
+
+See \verb|exercise_1/artificial_dataset.py| for the code.
+
+The generated data can be found in \verb|exercise_1/data.npy|, it contains 300 dataponts with 6 columns.
+
+Let's go over each point mentioned in the subject one by one.
+
+\textbf{All columns must have a different mean}
+
+\begin{itemize}
+    \item column 1: 2.58
+    \item column 2: 0.898
+    \item column 3: 1.686
+    \item column 4: 4.707
+    \item column 5: 0.349
+    \item column 6: 10.115
+\end{itemize}
+
+\textbf{All columns must have a different standard deviation}
+
+\begin{itemize}
+    \item column 1: 1.752
+    \item column 2: 0.827
+    \item column 3: 1.998
+    \item column 4: 1.889
+    \item column 5: 2.430
+    \item column 6: 1.352
+\end{itemize}
+
+\textbf{At least one column should contain integers}
+
+Column 1 contains integers.
+
+\textbf{At least one column should contain floats}
+
+All columns except column 1 contain floats.
+
+\textbf{One column must have a mean close to 2.5}
+
+Column 1 has a mean of 2.58.
+
+\textbf{Columns correlations}
+
+Using \verb|numpy.corrcoef| to get a correlation matrix for column 4, 5, and 6 we get this:
+
+\hfill
+
+$
+\begin{pmatrix}
+1. & -0.5595593 & 0.66913029\\
+-0.5595593 & 1. & 0.03168539\\
+0.66913029 & 0.03168539 & 1.
+\end{pmatrix}
+$
+
+\hfill
+
+Column 4 is \textbf{negatively correlated} with column 5.
+
+Column 4 is \textbf{positively correlated} with column 6.
+
+Column 5 is \textbf{has a correlation close to 0} with column 6.
+
+\end{Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part 2
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Part 2}
+
+\begin{Problem}
+    A dataset representing a population is stored in dataset.csv inside the
+
+    \verb|project/ex_2_metric/folder|.
+
+    Define a metric in this dataset, which means define a dissimilarity between the samples, by taking into account all their features (columns of the dataset).
+
+    Some features are numerical and others are categorical, hence you can not use a standard euclidean metric, and you need to define a custom metric, like we did in the \verb|code/metrics/hybrid_data/| exercise during the course. Compute the mean dissimilarity and the standard deviation of the dissimilarity distribution that you obtain, and save the dissimilarity matrix to a file (e.g. a npy file).
+
+    Importantly, you must define and explain which features are more important with this metric, since you have to balance the contribution of all the features. Your metric should be meaningful in the sense that not all feature values should induce the same contribution to the dissimilarity : the music style "technical death metal" is closer to "metal" than it is to "classical".
+\end{Problem}
+
+\begin{Solution}
+\end{Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

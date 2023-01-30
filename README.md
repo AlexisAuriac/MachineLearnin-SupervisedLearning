@@ -28,10 +28,15 @@ Install requirements:
 pip3 install -r requirements.txt
 ```
 
-## Todo
+## Report
 
-Exercise 1, 2, 3, 4: done
+
+
+## Todo
 
 Exercise 5: everything
 
-Write report
+Report:
+- add exercise 2, 3, 4
+- improve appearance (new pages when necessary, more space between lines, etc...)
+- add bibliography
