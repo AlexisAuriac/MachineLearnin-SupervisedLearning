@@ -578,5 +578,122 @@ Most dissimilar items:
 \end{Solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part 3
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Part 3}
+
+\begin{Problem}
+    We would like to predict the winner of a Basketball game, as a function of the data gathered at half-time.
+
+    The dataset is stored in \verb|project/ex_3_classification_NBA/|:
+    \begin{itemize}
+        \item The inputs x representing the features are stored in \verb|inputs.npy|.
+        \item The labels y are stored in \verb|labels.npy|. If the home team wins, the label is 1, -1 otherwise.
+    \end{itemize}
+
+    You are free to choose the classification method. However, it is required that you explain and discuss your approach in your report. For instance, you could discuss:
+    \begin{itemize}
+        \item the performance of several methods and models that you tried.
+        \item the choice of the hyperparameters and the method to tune them.
+        \item the optimization procedure.
+    \end{itemize}
+
+    Your objective should be to obtain a mean accuracy superior than 0.85 on a test set or as a cross validation score.
+
+    \href{https://scikit-learn.org/stable/modules/model_evaluation.html#accuracy-score}{scikit-learn model validation and accuracy score}
+
+    \href{https://scikit-learn.org/stable/modules/cross_validation.html}{scikit-learn cross validation}
+
+    Several methods might work, including some methods that we have not explicitely studied in the class. Do not hesitate to try such methods.
+\end{Problem}
+
+\begin{Solution}
+
+I tried 3 models for this exercise: KNeighbors, RandomForest and Logistic Regression.
+
+For each model I chose some hyperparameters to tune and then used GridSearchCV or RandomizedSearchCV to tune them and measure the mean accuracy of the model.
+
+GridSearchCV and RandomizedSearchCV both use cross validation.
+
+\subsection*{KNeighbors Classifier}
+
+See \verb|kneighbors.py| for the code.
+
+Hyperparameters:
+\begin{itemize}
+    \item n\_neighbors: can cause overfitting or underfitting if it is too small or too big respectively
+    \item weights: give all points the same or a different importance
+    \item p: distance measure, 1 is for manhattan, 2 is for euclidean
+\end{itemize}
+
+The best hyperparameters found using GridSearchCV were:
+\begin{lstlisting}[language=Python]
+{
+    'n_neighbors': 11,
+    'p': 2,
+    'weights': 'uniform'
+}
+\end{lstlisting}
+
+They give a mean score of 0.804.
+
+\subsection*{RandomForest Classifier}
+
+See \verb|random_forest.py| for the code.
+
+Hyperparameters:
+\begin{itemize}
+    \item n\_estimators: number of trees
+    \item max\_features: number of features to consider at every split
+    \item max\_depth: maximum number of levels in tree
+    \item min\_samples\_split: minimum number of samples required to split a node
+    \item min\_samples\_leaf: minimum number of samples required at each leaf node
+    \item bootstrap: method of selecting samples for training each tree
+\end{itemize}
+
+The best hyperparameters found using ```RandomizedSearchCV``` were:
+\begin{lstlisting}[language=Python]
+{
+    'n_estimators': 400,
+    'min_samples_split': 10,
+    'min_samples_leaf': 4,
+    'max_features': 'sqrt',
+    'max_depth': None,
+    'bootstrap': False
+}
+\end{lstlisting}
+
+They give a mean score of 0.816.
+
+\subsection*{LogisticRegression}
+
+See \verb|logistic_regression.py| for the code.
+
+Hyperparameters:
+\begin{itemize}
+    \item C: controls regularization strength (prevents overfitting)
+    \item solver: some solvers are better depending on: number of features, size of dataset, number of classes, etc...
+    \item max\_iter: maximum number of iterations taken for the solvers to converge
+\end{itemize}
+
+I am confused about the penalty hyperparameter, it seems to be deprecated in favor of solver but I am not sure. Furthermore only some values of solver are compatible with some values of penalty, I am not sure how to take that into account when using GridSearchCV or RandomizedSearchCV. I eventually decided to exclude it from the tuning.
+
+The best parameters found using GridSearchCV were:
+\begin{lstlisting}[language=Python]
+{
+    'C': 0.01,
+    'solver': 'newton-cg',
+    'max_iter': 1000
+}
+\end{lstlisting}
+
+They give a mean score of 0.904.
+
+This classification method achieves a mean score superior to 0.85.
+
+\end{Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
