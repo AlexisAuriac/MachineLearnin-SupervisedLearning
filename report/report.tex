@@ -134,8 +134,6 @@ innertopmargin=\topskip,
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Begin now!
 
-
-
 \begin{document}
 
 \begin{titlepage}
@@ -261,13 +259,15 @@ Using \verb|numpy.corrcoef| to get a correlation matrix for column 4, 5, and 6 w
 
 \hfill
 
-$
-\begin{pmatrix}
-1. & -0.5595593 & 0.66913029\\
--0.5595593 & 1. & 0.03168539\\
-0.66913029 & 0.03168539 & 1.
-\end{pmatrix}
-$
+\begin{center}
+    $
+    \begin{pmatrix}
+        1. & -0.5595593 & 0.66913029\\
+        -0.5595593 & 1. & 0.03168539\\
+        0.66913029 & 0.03168539 & 1.
+    \end{pmatrix}
+    $
+\end{center}
 
 \hfill
 
@@ -298,6 +298,283 @@ Column 5 is \textbf{has a correlation close to 0} with column 6.
 \end{Problem}
 
 \begin{Solution}
+
+The columns in the dataset are age, height, job, city, and favorite music style.
+
+The age and height features are numerical and their dissimilarity can be computed using the euclidean distance.
+
+The job, city, and favorite music style features are not numerical so we must define a custom metric for each of them.
+
+\subsection*{Job}
+
+See \verb|job.py| for the code.
+
+Here are the jobs we can find in the dataset: designer, fireman, teacher, doctor, painter, developper, and engineer.
+
+We will assign an art, science, and altruism value from 0 to 10 for each job.
+
+The values given are VERY subjective, we don't mean any offense.
+
+\hfill
+
+\begin{center}
+    \begin{tabular}{||c c c c||}
+        \hline
+        & art & science & altruism \\
+        \hline\hline
+        designer & 8 & 3 & 4 \\
+        \hline
+        fireman & 0 & 7 & 10 \\
+        \hline
+        teacher & 4 & 5 & 6 \\
+        \hline
+        doctor & 2 & 9 & 8 \\
+        \hline
+        painter & 10 & 2 & 3 \\
+        \hline
+        developper & 3 & 6 & 1 \\
+        \hline
+        engineer & 4 & 8 & 2 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Using the euclidean distance we get the following dissimilarity matrix:
+
+\begin{center}
+    \begin{tabular}{||c c c c c c c c||}
+        \hline
+        & designer & fireman & teacher & doctor & painter & developper & engineer \\
+        \hline\hline
+        designer & 0.000000 & 10.770330 & 4.898979 & 9.380832 & 2.449490 & 6.557439 & 6.708204 \\
+        \hline
+        fireman & 10.770330 & 0.000000 & 6.000000 & 3.464102 & 13.190906 & 9.539392 & 9.000000 \\
+        \hline
+        teacher & 4.898979 & 6.000000 & 0.000000 & 4.898979 & 7.348469 & 5.196152 & 5.000000 \\
+        \hline
+        doctor & 9.380832 & 3.464102 & 4.898979 & 0.000000 & 11.747340 & 7.681146 & 6.403124 \\
+        \hline
+        painter & 2.449490 & 13.190906 & 7.348469 & 11.747340 & 0.000000 & 8.306624 & 8.544004 \\
+        \hline
+        developper & 6.557439 & 9.539392 & 5.196152 & 7.681146 & 8.306624 & 0.000000 & 2.449490 \\
+        \hline
+        engineer & 6.708204 & 9.000000 & 5.000000 & 6.403124 & 8.544004 & 2.449490 & 0.000000 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+We can see that jobs like painter and fireman have a high dissimilarity (13.2) while painter and designer have a low dissimilarity (2.4).
+
+\subsection*{City}
+
+See \verb|city.py| for the code.
+
+Here are the cities we can find in the dataset: paris, marseille, toulouse, madrid, and lille.
+
+We will evaluate cities using 4 metrics: distance (using coordinates), population, country, and if it is a capital.
+
+Here is the data we used:
+
+\begin{center}
+    \begin{tabular}{||c c c c c||}
+        \hline
+        & coordinates & population & country & capital \\
+        \hline\hline
+        paris & (48.8566, 2.3522) & 2161000 & France & True \\
+        \hline
+        marseille & (43.2965, 5.3698) & 861635 & France & False \\
+        \hline
+        toulouse & (43.6047, 1.4442) & 471941 & France & False \\
+        \hline
+        madrid & (40.4168, 3.7038) & 3223000 & Spain & True \\
+        \hline
+        lille & (50.6292, 3.0573) & 232741 & France & False \\
+        \hline
+    \end{tabular}
+\end{center}
+
+To measure distance we use the library geopy we then use log10 so that it doesn't impact the dissimilarity too much.
+
+We compare the population using euclidean distance. We then use log10 so that it doesn't impact the dissimilarity too much.
+
+Not being from the same country adds a dissimilarity of 10.
+
+One being a capital and not the other adds a dissimilarity of 5.
+
+We then compute the square root of the sum of the squares to get the dissimilarity.
+
+Using this method we get the following dissimilarity matrix:
+
+\begin{center}
+    \begin{tabular}{||c c c c c c||}
+        \hline
+        & paris & marseille & toulouse & madrid & lille \\
+        \hline\hline
+        paris & 0.000000 & 7.897956 & 7.986461 & 11.675366 & 8.031395 \\
+        \hline
+        marseille & 7.897956 & 0.000000 & 5.590724 & 12.869235 & 5.798577 \\
+        \hline
+        toulouse & 7.986461 & 5.590724 & 0.000000 & 12.902215 & 5.378761 \\
+        \hline
+        madrid & 11.675366 & 12.869235 & 12.902215 & 0.000000 & 12.920325 \\
+        \hline
+        lille & 8.031395 & 5.798577 & 5.378761 & 12.920325 & 0.000000 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Favorite music style}
+
+See \verb|music.py| for the code.
+
+Here are the cities we can find in the dataset: trap, hiphop, metal, rock, rap, classical, other, jazz, and technical death metal.
+
+It is hard to find metrics for music styles, we decided to give each pair of music styles a dissimilarity based on personal knowledge.
+
+Some important assumptions that influenced our choices:
+
+\begin{itemize}
+    \item trap, hiphop, and rap are related
+    \item metal, rock, and technical death metal are related
+    \item other is very vague and large, so we gave it a dissimilarity of 10 for all music styles
+\end{itemize}
+
+We get this dissimilarity matrix:
+
+\begin{center}
+    \begin{tabular}{||c c c c c c c c c c||}
+        \hline
+        & trap & hiphop & metal & rock & rap & classical & other & jazz & technical death metal \\
+        \hline\hline
+        trap & 0 & 3 & 20 & 20 & 5 & 20 & 10 & 15 & 20 \\
+        \hline
+        hiphop & 3 & 0 & 18 & 17 & 5 & 15 & 10 & 12 & 20 \\
+        \hline
+        metal & 20 & 18 & 0 & 5 & 10 & 14 & 10 & 20 & 5 \\
+        \hline
+        rock & 20 & 17 & 5 & 0 & 10 & 12 & 10 & 17 & 13 \\
+        \hline
+        rap & 5 & 5 & 10 & 10 & 0 & 15 & 10 & 15 & 20 \\
+        \hline
+        classical & 20 & 15 & 14 & 12 & 15 & 0 & 10 & 8 & 20 \\
+        \hline
+        other & 10 & 10 & 10 & 10 & 10 & 10 & 0 & 10 & 10 \\
+        \hline
+        jazz & 15 & 12 & 20 & 17 & 15 & 8 & 10 & 0 & 20 \\
+        \hline
+        technical death metal & 20 & 20 & 5 & 13 & 20 & 20 & 10 & 20 & 0 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\section*{Overall dissimilarity}
+
+\subsection*{Adjusting means}
+
+See \verb|exercise_2.py| for the code.
+
+If we look at the means and standard deviation for each column we get
+
+\begin{center}
+    \begin{tabular}{||c c c||}
+        \hline
+        & mean & std \\
+        \hline\hline
+        age & 6.456159 & 4.892174 \\
+        \hline
+        height & 6.000623 & 4.679549 \\
+        \hline
+        job & 6.259779 & 3.747122 \\
+        \hline
+        city & 6.950629 & 5.205568 \\
+        \hline
+        favorite music style & 11.796500 & 6.390359 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+The mean isn't the same, which means that because of the way we compute dissimilarity some columns have inherently more value, that's an issue. It also makes standard deviations impossible to compare.
+
+We will try to have all means equal 10 (10 is arbitrary, it makes things relatively readable).
+
+After adjustment we get the following:
+
+\begin{center}
+    \begin{tabular}{||c c c c||}
+        \hline
+        & mean & std & adjusted std \\
+        \hline\hline
+        age & 6.456159 & 4.892174 & 7.577531 \\
+        \hline
+        height & 6.000623 & 4.679549 & 7.798439 \\
+        \hline
+        job & 6.259779 & 3.747122 & 5.986029 \\
+        \hline
+        city & 6.950629 & 5.205568 & 7.489348 \\
+        \hline
+        favorite music style & 11.796500 & 6.390359 & 5.417165 \\
+        \hline
+    \end{tabular}
+\end{center}
+
+\subsection*{Deciding feature importance}
+
+\textbf{Age}: The age of a person changes a lot of a person, beliefs, physical ability, experience, etc...
+
+$\Rightarrow 3$
+
+\textbf{Height}: Beside appearance and physical ability (in some contexts) this doesn't change much
+
+$\Rightarrow 1$
+
+\textbf{Job}: job is closely related to knowledge, ability, wealth, status, and more
+
+$\Rightarrow 3$
+
+\textbf{City}: Geographical location is related to culture, opportunities, language, and more
+
+$\Rightarrow 2.5$
+
+\textbf{Favorite music style}: As explained before, this dissimilarity is very hard to measure and music styles have a lot of intersections
+
+$\Rightarrow 0.5$
+
+\subsection*{Result matrix}
+
+See \verb|dissimilarity_matrix.npy| for the final dissimilarity matrix.
+
+mean: 58.386
+
+standard deviation: 19.976
+
+\subsubsection*{Side note: most similar and dissimilar items}
+
+Most similar items:
+\begin{center}
+    \begin{tabular}{||c c c c c c||}
+        \hline
+        & age & height & job & city & favorite music style \\
+        \hline\hline
+        102 & 27.086348 & 180.242244 & teacher & madrid & jazz \\
+        \hline
+        163 & 26.968458 & 179.665081 & teacher & madrid & jazz \\
+        \hline
+    \end{tabular}
+\end{center}
+
+Most dissimilar items:
+\begin{center}
+    \begin{tabular}{||c c c c c c||}
+        \hline
+        & age & height & job & city & favorite music style \\
+        \hline\hline
+        40 & 10.851506 & 169.432515 & fireman & lille & jazz \\
+        \hline
+        85 & 46.610179 & 181.358551 & fireman & toulouse & trap \\
+        \hline
+    \end{tabular}
+\end{center}
+
 \end{Solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
