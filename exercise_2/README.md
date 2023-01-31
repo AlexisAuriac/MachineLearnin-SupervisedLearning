@@ -75,12 +75,12 @@ Evaluating cities using 4 metrics: coordinates, population, country, and if it i
 
 Values:
 ```
-                 coordinates   population country  capital
-paris      (48.8566, 2.3522)  2161000.000  France     True
-marseille  (43.2965, 5.3698)      861.635  France    False
-toulouse   (43.6047, 1.4442)      471.941  France    False
-madrid     (40.4168, 3.7038)  3223000.000   Spain     True
-lille      (50.6292, 3.0573)      232.741  France    False
+                 coordinates  population country  capital
+paris      (48.8566, 2.3522)     2161000  France     True
+marseille  (43.2965, 5.3698)      861635  France    False
+toulouse   (43.6047, 1.4442)      471941  France    False
+madrid     (40.4168, 3.7038)     3223000   Spain     True
+lille      (50.6292, 3.0573)      232741  France    False
 ```
 
 To measure distance we use the library ```geopy``` (Euclidean won't work since the earth isn't flat). We then use log10 so that it doesn't impact the dissimilarity too much.
@@ -96,11 +96,11 @@ All of these are squared and the result is square rooted ("square root" isn't a 
 We get this dissimilarity matrix:
 ```
                paris  marseille   toulouse     madrid      lille
-paris       0.000000  15.418889  15.419060  17.103627  15.419165
-marseille  15.418889   0.000000   5.965362  18.696708   6.443963
-toulouse   15.419060   5.965362   0.000000  18.696805   5.477300
-madrid     17.103627  18.696708  18.696805   0.000000  18.696864
-lille      15.419165   6.443963   5.477300  18.696864   0.000000
+paris       0.000000   7.897956   7.986461  11.675366   8.031395
+marseille   7.897956   0.000000   5.590724  12.869235   5.798577
+toulouse    7.986461   5.590724   0.000000  12.902215   5.378761
+madrid     11.675366  12.869235  12.902215   0.000000  12.920325
+lille       8.031395   5.798577   5.378761  12.920325   0.000000
 ```
 
 ### Music style
@@ -185,11 +185,11 @@ Favorite music style: As explained before, this dissimilarity is very hard to me
 
 ### Result matrix
 
-See ```data.npy``` for the final dissimilarity matrix.
+See ```dissimilarity_matrix.npy``` for the final dissimilarity matrix.
 
-mean: ```58.386196906332174```
+mean: ```57.719```
 
-standard deviation: ```19.975793552979223```
+standard deviation: ```19.274```
 
 ### Side note: most (dis)similar items
 

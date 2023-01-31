@@ -22,11 +22,11 @@ cities_metrics = ['coordinates', 'population', 'country', 'capital']
 
 # All these were found with a simple google search, they may bot be completely accurate or up to date
 cities_char = [
-	[(48.8566, 2.3522), 2.161e6, 'France', True],
-	[(43.2965, 5.3698), 861.635, 'France', False],
-	[(43.6047, 1.4442), 471.941, 'France', False],
-	[(40.4168, 3.7038), 3.223e6, 'Spain', True],
-	[(50.6292, 3.0573), 232.741, 'France', False],
+	[(48.8566, 2.3522), 2_161_000, 'France', True],
+	[(43.2965, 5.3698), 861_635, 'France', False],
+	[(43.6047, 1.4442), 471_941, 'France', False],
+	[(40.4168, 3.7038), 3_223_000, 'Spain', True],
+	[(50.6292, 3.0573), 232_741, 'France', False],
 ]
 
 city_char_df = pd.DataFrame(cities_char, cities, cities_metrics)
