@@ -695,5 +695,83 @@ This classification method achieves a mean score superior to 0.85.
 \end{Solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part 4
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Part 4}
+
+\begin{Problem}
+    We would like to predict the amount of electricity produced by a windfarm, as a function of the information gathered in a number of physical sensors (e.g. speed of the wind, temperature, ...).
+
+    The dataset is stored in \verb|project/ex_4_regression_windfarm/|:
+    \begin{itemize}
+        \item The inputs x are stored in \verb|inputs.npy|.
+        \item The labels y are stored in \verb|labels.npy|.
+    \end{itemize}
+
+    The instructions are the same as in 3.
+
+    Your objective should be to obtain a R2 score superior to 0.85 on a test set or as a cross validation score.
+
+    \href{https://fr.wikipedia.org/wiki/Coefficient_de_d%C3%A9termination}{Coefficient of determination}
+
+    \href{https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html}{scikit-learn r2 score}
+
+    Several methods might work, including some methods that we have not explicitly studied in the class. Do not hesitate to try such methods.
+\end{Problem}
+
+\begin{Solution}
+
+Similarly to the previous part, we tried 4 different regression models, until we arrived to an accuracy superior to 0.85. The models we tried are Linear regression, Polynomial regression, Ridge regression, and Lasso regression. We briefly considered using Logistic regression before realizing that the dependent variable needs to be binary for it to work. For each model we tried tuning the hyperparameters (except for linear regression and polynomial regression) and checked the result with cross validation.
+
+\subsection*{Linear regression}
+
+See \verb|linear_regression.py| for the code.
+
+Mean R2: 0.688
+
+\subsection*{Polynomial regression}
+
+See \verb|polynomial_regression.py| for the code.
+
+Mean R2 (degree=2): 0.750
+
+Mean R2 (degree=3): 0.722
+
+The reduced accuracy with degree=3 can be explained by overfitting.
+
+degree=4 is too complex to be tested on our computers.
+
+This method yields better results than linear regression but is still not enough.
+
+\subsection*{Ridge regression}
+
+See \verb|ridge.py| for the code.
+
+Mean R2: 0.765
+
+\subsection*{Lasso regression}
+
+See \verb|lasso.py| for the code.
+
+Mean R2: 0.887
+
+This is a satisfactory solution.
+
+\subsection*{VIF / multicollinearity}
+
+See \verb|data_vif.py| for the code.
+
+The mean VIF of the dataset is: 7.826
+
+Standard deviation of VIF: 0.846
+
+The VIF of the data is moderately high, which is a sign of multicollinearity.
+
+This could explain why Ridge and Lasso regression are better for this dataset.
+
+\end{Solution}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

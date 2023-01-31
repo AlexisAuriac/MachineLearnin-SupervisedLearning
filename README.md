@@ -41,7 +41,6 @@ The process of installing latex tools is complicated and platform dependent (and
 Exercise 5: everything
 
 Report:
-- add exercise 4
 - improve appearance (new pages when necessary, more space between lines, better sections, etc...)
 - add bibliography
 - add justifications for additional dependencies in introduction
