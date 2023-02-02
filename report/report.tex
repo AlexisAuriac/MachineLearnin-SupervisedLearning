@@ -168,21 +168,32 @@ innertopmargin=\topskip,
     \end{center}
 \end{titlepage}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%Start the assignment now
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newpage
 
-\subsubsection*{Introduction}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Introduction
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Introduction}
 
 We did part 1, 2, 3, and 4 but did not have time to do part 5.
 
-Division of labor:
+\subsection*{Division of labor}
+
 \begin{itemize}
     \item Alexandre: part 1
     \item Benjamin: part 2
     \item Alexis: part 3 and 4, writing report
+\end{itemize}
+
+\subsection*{Additional dependencies}
+
+We used the following additional dependencies:
+
+\begin{itemize}
+    \item geopy: to compute distances between coordinates, see part 2
+    \item statsmodels: for data exploration, see part 4
 \end{itemize}
 
 \newpage
@@ -191,7 +202,7 @@ Division of labor:
 %Part 1
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection*{Part 1}
+\section*{Part 1}
 
 \begin{Problem}
     The goal of this exercise is to work with statistical notions such as mean, standard deviation, and correlation.
@@ -211,6 +222,8 @@ Division of labor:
     \end{itemize}
 \end{Problem}
 
+\newpage
+
 \begin{Solution}
 
 See \verb|exercise_1/artificial_dataset.py| for the code.
@@ -219,7 +232,7 @@ The generated data can be found in \verb|exercise_1/data.npy|, it contains 300 d
 
 Let's go over each point mentioned in the subject one by one.
 
-\textbf{All columns must have a different mean}
+\subsubsection*{All columns must have a different mean}
 
 \begin{itemize}
     \item column 1: 2.58
@@ -230,7 +243,7 @@ Let's go over each point mentioned in the subject one by one.
     \item column 6: 10.115
 \end{itemize}
 
-\textbf{All columns must have a different standard deviation}
+\subsubsection*{All columns must have a different standard deviation}
 
 \begin{itemize}
     \item column 1: 1.752
@@ -241,19 +254,19 @@ Let's go over each point mentioned in the subject one by one.
     \item column 6: 1.352
 \end{itemize}
 
-\textbf{At least one column should contain integers}
+\subsubsection*{At least one column should contain integers}
 
 Column 1 contains integers.
 
-\textbf{At least one column should contain floats}
+\subsubsection*{At least one column should contain floats}
 
 All columns except column 1 contain floats.
 
-\textbf{One column must have a mean close to 2.5}
+\subsubsection*{One column must have a mean close to 2.5}
 
 Column 1 has a mean of 2.58.
 
-\textbf{Columns correlations}
+\subsubsection*{Columns correlations}
 
 Using \verb|numpy.corrcoef| to get a correlation matrix for column 4, 5, and 6 we get this:
 
@@ -279,11 +292,13 @@ Column 5 is \textbf{has a correlation close to 0} with column 6.
 
 \end{Solution}
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Part 2
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection*{Part 2}
+\section*{Part 2}
 
 \begin{Problem}
     A dataset representing a population is stored in dataset.csv inside the
@@ -305,7 +320,9 @@ The age and height features are numerical and their dissimilarity can be compute
 
 The job, city, and favorite music style features are not numerical so we must define a custom metric for each of them.
 
-\subsection*{Job}
+\newpage
+
+\subsubsection*{Job}
 
 See \verb|job.py| for the code.
 
@@ -365,7 +382,9 @@ Using the euclidean distance we get the following dissimilarity matrix:
 
 We can see that jobs like painter and fireman have a high dissimilarity (13.2) while painter and designer have a low dissimilarity (2.4).
 
-\subsection*{City}
+\newpage
+
+\subsubsection*{City}
 
 See \verb|city.py| for the code.
 
@@ -423,7 +442,9 @@ Using this method we get the following dissimilarity matrix:
     \end{tabular}
 \end{center}
 
-\subsection*{Favorite music style}
+\newpage
+
+\subsubsection*{Favorite music style}
 
 See \verb|music.py| for the code.
 
@@ -467,9 +488,11 @@ We get this dissimilarity matrix:
     \end{tabular}
 \end{center}
 
-\section*{Overall dissimilarity}
+\newpage
 
-\subsection*{Adjusting means}
+\subsection*{Overall dissimilarity}
+
+\subsubsection*{Adjusting means}
 
 See \verb|exercise_2.py| for the code.
 
@@ -577,11 +600,13 @@ Most dissimilar items:
 
 \end{Solution}
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Part 3
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection*{Part 3}
+\section*{Part 3}
 
 \begin{Problem}
     We would like to predict the winner of a Basketball game, as a function of the data gathered at half-time.
@@ -615,6 +640,8 @@ I tried 3 models for this exercise: KNeighbors, RandomForest and Logistic Regres
 For each model I chose some hyperparameters to tune and then used GridSearchCV or RandomizedSearchCV to tune them and measure the mean accuracy of the model.
 
 GridSearchCV and RandomizedSearchCV both use cross validation.
+
+\newpage
 
 \subsection*{KNeighbors Classifier}
 
@@ -694,6 +721,8 @@ This classification method achieves a mean score superior to 0.85.
 
 \end{Solution}
 
+\newpage
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Part 4
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -743,6 +772,8 @@ The reduced accuracy with degree=3 can be explained by overfitting.
 degree=4 is too complex to be tested on our computers.
 
 This method yields better results than linear regression but is still not enough.
+
+\newpage
 
 \subsection*{Ridge regression}
 
