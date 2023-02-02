@@ -38,7 +38,11 @@ The process of installing latex tools is complicated and platform dependent (and
 
 ## Todo
 
-Exercise 5: everything
+Exercise 5:
+- add more data analysis
+- clean up code
+- add docstrings
 
 Report:
 - add bibliography
+- add exercise 5
