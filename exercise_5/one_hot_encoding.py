@@ -1,5 +1,9 @@
 #!/bin/env python3
 
+"""
+Simplifies dataset using one hot encoding and uses a Logistic Regression model to try and predict if the squirrel approaches.
+"""
+
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import OneHotEncoder
@@ -8,6 +12,9 @@ from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import make_scorer, accuracy_score
 
 def get_data():
+	"""
+	Loads and simplifies dataset using one hot encoding.
+	"""
 	df = pd.read_csv("nyc_squirrels.csv")
 
 	y = df['approaches'].to_numpy()

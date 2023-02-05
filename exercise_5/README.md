@@ -55,7 +55,7 @@ Some of the columns are binary (climbing, approaches, tail_twiches, etc...).
 
 Some of the columns are strings (fur color, notes by the volunteer, a unique id, etc...).
 
-There are some values that we can immidiately dropped:
+There are some values that can be dropped immidiately:
 - unique_squirrel_id: a unique id that looks like ```37F-PM-1014-03```
 - lat_long: latitude and longitude of the sigthing, there are already a lat and a long feature in the dataset
 - hectare: ID tag, which is derived from the hectare grid used to divide and count the park area, it is redundant with lat and long
@@ -64,10 +64,12 @@ A lot of the features are strings, but a lot of the time these features are not 
 
 I tried 2 methods:
 - if the feature is set 1 else 0 (see simplify_dataset.py)
-- using one hot encoding (see one_hot_encoding)
+- using one hot encoding (see one_hot_encoding.py)
 
 ## Prediction
 
 I then used a Logistic regression model using the approaches feature as the label.
 
 With both ways of simplyfing the dataset we get the same accuracy: ```0.941```
+
+Actually adding and removing features doesn't seem to affect the accuracy at all, this probably means there is a problem.

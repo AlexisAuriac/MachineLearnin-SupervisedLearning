@@ -1,5 +1,10 @@
 #!/bin/env python3
 
+"""
+Simplifies dataset by setting categorical features to 0 if they are NaN or 1 if they are not.
+Then uses a Logistic Regression model to try and predict if the squirrel approaches.
+"""
+
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import LogisticRegression
@@ -7,6 +12,9 @@ from sklearn.model_selection import RandomizedSearchCV
 from sklearn.metrics import make_scorer, accuracy_score
 
 def get_data():
+	"""
+	Loads the dataset and simplifies by setting categorical features to 0 if they are NaN or 1 if they are not.
+	"""
 	df = pd.read_csv('nyc_squirrels.csv')
 
 	to_drop = ['unique_squirrel_id', 'hectare', 'lat_long']
