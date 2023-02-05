@@ -177,14 +177,14 @@ innertopmargin=\topskip,
 
 \section*{Introduction}
 
-We did part 1, 2, 3, and 4 but did not have time to do part 5.
+We did part 1, 2, 3, and 4, we did not have time to finish part 5.
 
 \subsection*{Division of labor}
 
 \begin{itemize}
     \item Alexandre: part 1
     \item Benjamin: part 2
-    \item Alexis: part 3 and 4, writing report
+    \item Alexis: part 3, 4, and 5, writing report
 \end{itemize}
 
 \subsection*{Additional dependencies}
@@ -206,7 +206,7 @@ We used the following additional dependencies:
 
 \begin{Problem}
     The goal of this exercise is to work with statistical notions such as mean, standard deviation, and correlation.
-    
+
     Write a file named artificial\_dataset.py that generates a numerical dataset with 300 datapoints (i.e. lines) and at least 6 columns and saves it to a csv file or to a numpy array in a binary python file.
 
     The columns must satisfy the following requirements:
@@ -801,6 +801,97 @@ The VIF of the data is moderately high, which is a sign of multicollinearity.
 
 This could explain why Ridge and Lasso regression are better for this dataset.
 
+\end{Solution}
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Part 5
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsection*{Part 5}
+
+\begin{Problem}
+    Pick a dataset and perform a supervised learning on it. Ideally, your algorithm should answer an interesting question about the dataset. The supervised learning can then be either a classification or a regression.
+
+    You are free to choose the dataset within the following constraints:
+    \begin{itemize}
+        \item several hundreds of lines
+        \item at least 6 attributes (columns), the first being a unique id
+        \item some features may be categorical (non quantitative).
+    \end{itemize}
+
+    If necessary, you can tweak an existing dataset in order to artificially make it possible to apply analysis ans visualization techniques. Example resources to find datasets:
+    \begin{itemize}
+        \item \href{https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research}{Link 1}
+        \item \href{https://perso.telecom-paristech.fr/eagan/class/igr204/datasets}{Link 2}
+        \item \href{https://github.com/awesomedata/awesome-public-datasets}{Link 3}
+        \item \href{https://www.kaggle.com/datasets}{Link 4}
+    \end{itemize}
+
+    You could start with a general analysis of the dataset, with for instance a file analysis.py that studies:
+    \begin{itemize}
+        \item histograms of quantitative variables with a comment on important statistical aspects, such as means, standard deviations, etc.
+        \item A study of potential outliers
+        \item Correlation matrices (maybe not for all variables)
+        \item Any interesting analysis : if you have categorical data, with categories are represented most ? To what extent ?
+    \end{itemize}
+
+    If the dataset is very large you may also extract a random sample of the dataset to build histogram or compute correlations. You can discuss whether the randomness of the sample has an important influence on the analysis result (this will depend on the dataset).
+
+    Whether it is a classification or a regression, you must provide an evaluation of your processing. For supervised learning, this could be an average squared error, coefficient of determination (R2 score), etc (\url{https://scikit-learn.org/stable/modules/model_evaluation.html}).
+
+    Short docstrings in the python files will be appreciated, at least at the beginning of each file.
+
+    In your report, you could include for instance:
+    \begin{itemize}
+        \item general informations on the dataset found in the analysis file.
+        \item a potential comparison between several algorithm / models that you explored, if relevant
+        \item a presentation of the method used to tune the algorithms (choice of hyperparameters, cross validation, etc).
+        \item a short discussion of the results
+    \end{itemize}
+
+    Feel free to add useful visualizations for each step of your processing.
+\end{Problem}
+
+\begin{Solution}
+
+    For this exercise we chose the \href{https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-10-29}{nyc\_squirrels dataset}, it comes from a census where over 300 volunteers counted and observed the squirels living in New York.
+
+    This dataset contains 3023 rows and 36 columns.
+
+    Our objective will be to predict when a squirrel approaches, this measure is interesting because sqirrels are cute and I want them to eat out of my hand.
+
+    \subsection*{Simplifying the dataset}
+
+    Some of the columns are numerical (longitude, latitude, date, etc...).
+
+    Some of the columns are binary (climbing, approaches, tail\_twiches, etc...).
+
+    Some of the columns are strings (fur color, notes by the volunteer, a unique id, etc...).
+
+    There are some values that can be dropped immidiately:
+    \begin{itemize}
+        \item unique\_squirrel\_id: a unique id that looks like \verb|37F-PM-1014-03|
+        \item lat\_long: latitude and longitude of the sigthing, there are already a lat and a long feature in the dataset
+        \item hectare: ID tag, which is derived from the hectare grid used to divide and count the park area, it is redundant with lat and long
+    \end{itemize}
+
+    A lot of the features are strings, but a lot of the time these features are not set.
+
+    We tried 2 methods:
+    \begin{itemize}
+        \item if the feature is set 1 else 0 (see \verb|simplify_dataset.py|)
+        \item using one hot encoding (see \verb|one_hot_encoding.py|)
+    \end{itemize}
+
+    \subsection*{Prediction}
+
+    We then used a Logistic regression model using the approaches feature as the label.
+
+    With both ways of simplyfing the dataset we get the same accuracy: 0.941.
+
+    Adding and removing features doesn't seem to affect the accuracy at all, this probably means there is a problem.
 \end{Solution}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

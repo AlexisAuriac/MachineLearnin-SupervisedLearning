@@ -38,7 +38,7 @@ Feel free to add useful visualizations for each step of your processing.
 
 ## Solution
 
-For this exercise I chose a the [nyc_squirrels dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-10-29
+For this exercise I chose the [nyc_squirrels dataset](https://github.com/rfordatascience/tidytuesday/tree/master/data/2019/2019-10-29
 ), it comes from a census where over 300 volunteers counted and observed the squirels living in New York.
 
 This dataset contains 3023 rows and 36 columns.
